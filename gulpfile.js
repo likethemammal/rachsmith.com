@@ -2,7 +2,22 @@ var gulp = require('gulp');
 var markdown = require('gulp-markdown');
 var fs = require('fs');
 var jsdom = require('jsdom');
+var sass = require('gulp-sass');
+var watch = require('gulp-watch');
 
+
+gulp.task('styles', function() {
+    gulp.src('site/scss/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('build/css'))
+        .on('end', function() {
+            console.log('styles updated');
+        });
+});
+
+gulp.task('watch', function() {
+    gulp.watch('site/scss/*.scss', ['styles']);
+});
 
 gulp.task('update', function() {
     var posts = [];
@@ -11,7 +26,7 @@ gulp.task('update', function() {
     fs.readdir('site/content/posts', function(err, files) {
         for(var i = 0, l = files.length; i < l; i++) {
             processMarkdown(files[i], 'posts', function(post) {
-                if(post.published == 'true') posts.push(post);
+                if(post.settings.published == 'true') posts.push(post);
                 generateHTML(post, 'posts');
                 processed++;
                 if(processed == files.length) createBlog(posts);
@@ -47,6 +62,8 @@ function processMarkdown(filename, contentType, callback) {
             else postContent += lines[i] + '\n';
         }
 
+        post.path = post.settings.type == 'post' ? post.settings.date.split('-')[0] : '';
+
         fs.writeFile(post.md, postContent, 'utf8', function() {
             gulp.src(post.md)
                 .pipe(markdown())
@@ -56,6 +73,7 @@ function processMarkdown(filename, contentType, callback) {
                         post.settings.content = content;
                         jsdom.env(content, function (errors, window) {
                             post.settings.extract = window.document.getElementsByTagName('p')[0].innerHTML;
+                            post.settings.url = post.path+'/'+post.html;
                             window.close();
                             callback(post);
                             fs.unlink(post.md);
@@ -69,33 +87,29 @@ function processMarkdown(filename, contentType, callback) {
 }
 
 function generateHTML(post, contentType) {
-    console.log(post);
-    console.log('site/content/templates/'+contentType+'/'+post.settings.type+'.html');
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
         var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
         for(var i = 0, l = toReplace.length; i < l; i++) {
             template = template.replace(toReplace[i], post.settings[toReplace[i]
                 .replace(new RegExp('\{{|\}}', 'g'), '')] || '');
         }
-
-        post.path = post.settings.type == 'post' ? 'build/'+post.settings.date.split('-')[0] : 'build/';
         writePost(post, template);
     });
 }
 
 function writePost(post, template) {
-    if (!fs.existsSync(post.path)) {
-        fs.mkdirSync(post.path);
+    if (!fs.existsSync('build/'+post.path)) {
+        fs.mkdirSync('build/'+post.path);
     }
 
-    fs.writeFile(post.path+'/'+post.html, template, 'utf8');
+    fs.writeFile('build/'+post.path+'/'+post.html, template, 'utf8');
 }
 
 function createBlog(posts) {
-    var postsHTML = ''
+    var postsHTML = '';
     for(var i = 0, l = posts.length; i < l; i++) {
         var post = posts[i];
-        fs.readFile('site/content/templates/index/post.html', 'utf8', function(err, template) {
+        fs.readFile('site/content/templates/index/'+post.settings.type+'.html', 'utf8', function(err, template) {
             var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
             for(var i = 0, l = toReplace.length; i < l; i++) {
                 template = template.replace(toReplace[i], post.settings[toReplace[i]

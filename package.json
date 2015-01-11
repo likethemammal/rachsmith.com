@@ -5,6 +5,8 @@
   "devDependencies": {
     "gulp": "^3.8.10",
     "gulp-markdown": "^1.0.0",
+    "gulp-sass": "^1.2.4",
+    "gulp-watch": "^3.0.0",
     "jsdom": "^2.0.0"
   }
 }
