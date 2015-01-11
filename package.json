@@ -1,0 +1,10 @@
+{
+  "name": "wishy-washy",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-markdown": "^1.0.0",
+    "jsdom": "^2.0.0"
+  }
+}
