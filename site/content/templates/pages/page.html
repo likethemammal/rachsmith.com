@@ -4,8 +4,29 @@
     <meta charset="UTF-8">
     <title>Rachel Smith :: {{title}}</title>
     <meta name="description" content="{{description}}">
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Roboto+Slab:300' rel='stylesheet' type='text/css'>
+    <link href='./css/{{style}}.css' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-{{content}}
+<header class="home-header">
+    <h1><a href="./index.html">Rachel Smith</a></h1>
+    <nav>
+        <a class="home-btn" href="about.html">
+            <span class="text">About</span>
+            <span data-label="About" class="hover"></span>
+        </a>
+        <a class="home-btn" href="http://twitter.com/rachsmithtweets">
+            <span class="text">Twitter</span>
+            <span data-label="Twitter" class="hover"></span></a>
+        <a class="home-btn" href="http://codepen.io/rachsmith">
+            <span class="text">CodePen</span>
+            <span data-label="CodePen" class="hover"></span></a>
+    </nav>
+</header>
+<main class="content">
+    {{content}}
+</main>
 </body>
 </html>

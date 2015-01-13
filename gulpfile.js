@@ -4,6 +4,7 @@ var fs = require('fs');
 var jsdom = require('jsdom');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+var copy = require('gulp-copy');
 
 
 gulp.task('styles', function() {
@@ -17,6 +18,7 @@ gulp.task('styles', function() {
 
 gulp.task('watch', function() {
     gulp.watch('site/scss/*.scss', ['styles']);
+    gulp.watch('site/**/*', ['update']);
 });
 
 gulp.task('update', function() {
@@ -27,7 +29,7 @@ gulp.task('update', function() {
         for(var i = 0, l = files.length; i < l; i++) {
             processMarkdown(files[i], 'posts', function(post) {
                 if(post.settings.published == 'true') posts.push(post);
-                generateHTML(post, 'posts');
+                if(post.settings.type != 'link' && post.settings.type != 'codepen') generateHTML(post, 'posts');
                 processed++;
                 if(processed == files.length) createBlog(posts);
             });
@@ -42,6 +44,12 @@ gulp.task('update', function() {
             });
         }
     });
+
+    gulp.src('site/js/**/*.js')
+        .pipe(copy('build', {prefix: 1}));
+
+    gulp.src('site/img/**/*')
+        .pipe(copy('build', {prefix: 1}));
 });
 
 function processMarkdown(filename, contentType, callback) {
@@ -58,6 +66,7 @@ function processMarkdown(filename, contentType, callback) {
             var setting = lines[i].match('(.*)\::');
             if (setting) {
                 post.settings[setting[1]] = lines[i].split(setting[0] + ' ')[1];
+                if(setting[1] == 'date') post.settings.formattedDate = formatDate(post.settings.date);
             }
             else postContent += lines[i] + '\n';
         }
@@ -86,6 +95,35 @@ function processMarkdown(filename, contentType, callback) {
     });
 }
 
+function formatDate(date) {
+    var dateSplit = date.split('-');
+
+    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
+}
+
+function getOrdinal(n) {
+    var s=["th","st","nd","rd"],
+        v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
+}
+
+function getMonthName(n) {
+    switch(n) {
+        case 1: return 'Jan'; break;
+        case 2: return 'Feb'; break;
+        case 3: return 'Mar'; break;
+        case 4: return 'Apr'; break;
+        case 5: return 'May'; break;
+        case 6: return 'Jun'; break;
+        case 7: return 'Jul'; break;
+        case 8: return 'Aug'; break;
+        case 9: return 'Sep'; break;
+        case 10: return 'Oct'; break;
+        case 11: return 'Nov'; break;
+        case 12: return 'Dec'; break;
+    }
+}
+
 function generateHTML(post, contentType) {
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
         var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
@@ -106,22 +144,41 @@ function writePost(post, template) {
 }
 
 function createBlog(posts) {
+    posts.sort(function(a,b) {
+        return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
+    });
     var postsHTML = '';
+    var processed = 0;
     for(var i = 0, l = posts.length; i < l; i++) {
         var post = posts[i];
-        fs.readFile('site/content/templates/index/'+post.settings.type+'.html', 'utf8', function(err, template) {
-            var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
-            for(var i = 0, l = toReplace.length; i < l; i++) {
-                template = template.replace(toReplace[i], post.settings[toReplace[i]
-                    .replace(new RegExp('\{{|\}}', 'g'), '')] || '');
+        createPostHTML(post, function(post) {
+            processed++;
+            if(processed == posts.length) {
+                for(var k = 0, kl = posts.length; k < kl; k++) {
+                    postsHTML += posts[k].indexHTML;
+                }
+                createIndex(postsHTML);
             }
-
-            postsHTML += template;
-
-            fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
-                indexTemplate = indexTemplate.replace('{{posts}}', postsHTML);
-                fs.writeFile('build/index.html', indexTemplate, 'utf8');
-            });
-        });
+        })
     }
+}
+
+function createPostHTML(post, callback) {
+    fs.readFile('site/content/templates/index/'+post.settings.type+'.html', 'utf8', function(err, template) {
+        console.log(err);
+        var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
+        for(var i = 0, l = toReplace.length; i < l; i++) {
+            template = template.replace(toReplace[i], post.settings[toReplace[i]
+                .replace(new RegExp('\{{|\}}', 'g'), '')] || '');
+        }
+        post.indexHTML = template;
+        callback(post);
+    });
+}
+
+function createIndex(postsHTML) {
+    fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
+        indexTemplate = indexTemplate.replace('{{posts}}', postsHTML);
+        fs.writeFile('build/index.html', indexTemplate, 'utf8');
+    });
 }
