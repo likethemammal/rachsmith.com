@@ -3,6 +3,7 @@ type:: post
 published:: true
 tags:: code
 title:: Front End Design Conference 2014
+style:: default-post
 
 #Front End Design Conference 2014
 

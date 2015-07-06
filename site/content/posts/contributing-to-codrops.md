@@ -3,6 +3,7 @@ type:: post
 published:: true
 tags:: code
 title:: Contributing to Codrops
+style:: default-post
 
 #Contributing to Codrops
 

@@ -1,4 +1,5 @@
 @import 'base/normalize';
+@import 'bourbon/bourbon';
 
 $pink: #9b1643;
 $dusty-purple: #74546A;
@@ -42,7 +43,7 @@ p {
     position: absolute;
     width: 338px;
     left: 50%;
-    margin-left: -160px;
+    margin-left: -164px;
     top: 200px;
 
     a {
@@ -77,9 +78,9 @@ p {
     color: $pink;
     background: #fff;
     top: 0;
-    transform: translateY(25px);
+    @include transform(translateY(25px));
     overflow: hidden;
-    transition: transform 0.1s ease-out;
+    @include transition(transform 0.1s ease-out);
 
     &::after {
       content: attr(data-label);
@@ -87,17 +88,17 @@ p {
       height: 25px;
       position: absolute;
       left: 0;
-      transform: translateY(-25px);
-      transition: transform 0.1s ease-out;
+      @include transform(translateY(-25px));
+      @include transition(transform 0.1s ease-out);
     }
   }
 
   &:hover {
     .hover {
-      transform: translateY(0px);
+      @include transform(translateY(0px));
 
       &::after {
-        transform: translateY(0px);
+        @include transform(translateY(0px));
       }
     }
   }
@@ -110,19 +111,20 @@ p {
 
 .home-post {
   width: 300px;
-  padding: 20px 15px;
+  padding: 22px 15px;
+  box-sizing: border-box;
 
   .published {
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    color: #aaa;
+    color: #8DA3A3;
     font-size: 13px;
     margin: 0;
   }
 
   h2 {
     margin: 5px 0 0 0;
-    transition: transform 0.1s ease-out, padding 0.1s ease-out;
+    @include transition(transform 0.1s ease-out, padding 0.1s ease-out);
 
     &:hover {
       .home-post-title {
@@ -144,7 +146,7 @@ p {
       margin-bottom: -15px;
 
       &:hover {
-        transform: translateY(-4px);
+        @include transform(translateY(-4px));
 
         .home-post-link {
           opacity: 1;
@@ -164,8 +166,8 @@ p {
   font-size: 20px;
   text-transform: uppercase;
   display: block;
-  transition: color 0.1s ease-out;
-  line-height: 22px;
+  @include transition(color 0.1s ease-out);
+  line-height: 24px;
 
   .icon {
     width: 20px;
@@ -175,9 +177,9 @@ p {
     &.codepen {
       width: 25px;
       height: 25px;
-      left: -2px;
+      left: -4px;
       top: 1px;
-      margin-right: 1px;
+      margin-right: -1px;
       position: relative;
     }
   }
@@ -185,13 +187,14 @@ p {
 
 .home-post-link {
   font-size: 13px;
+  line-height: 16px;
   color: $pink;
   text-decoration: none;
   margin: 0;
   display: block;
   opacity: 0;
-  margin-top: -2px;
-  transition: opacity 0.1s ease-out;
+  margin-top: 0px;
+  @include transition(opacity 0.1s ease-out);
 }
 
 .read-more {
@@ -200,6 +203,28 @@ p {
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+@media (max-width: 425px) {
+  .home-header {
+    height: 300px;
+    background: $pink;
+    position: relative;
+
+    h1 {
+      top: 30%;
+    }
+
+    nav {
+      width: 102px;
+      margin-left: -51px;
+      top: 150px;
+
+      a {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 type:: page
 published:: true
 title:: Test Post
-style:: default
+style:: default-page
 
 <img src="./img/me.jpg" style="width: 200px; height: 200px; float: left; margin-right: 15px; margin-bottom: 5px;" />
 
