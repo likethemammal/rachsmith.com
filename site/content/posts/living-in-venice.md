@@ -1,5 +1,6 @@
 date:: 2014-05-27
 type:: post
+category:: writing
 published:: true
 tags:: code
 title:: Just one of many things I like about living in Venice

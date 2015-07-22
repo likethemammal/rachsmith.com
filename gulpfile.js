@@ -96,9 +96,10 @@ function processMarkdown(filename, contentType, callback) {
 }
 
 function formatDate(date) {
-    var dateSplit = date.split('-');
+    var dateSplit = date.split('-').join('&#8226;');
+    return dateSplit;
 
-    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
+//    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
 }
 
 function getOrdinal(n) {
@@ -147,7 +148,10 @@ function createBlog(posts) {
     posts.sort(function(a,b) {
         return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
     });
-    var postsHTML = '';
+    var writingCount = 0, updatesCount = 0, pensCount = 0;
+    var writingHTML = '';
+    var updatesHTML = '';
+    var pensHTML = '';
     var processed = 0;
     for(var i = 0, l = posts.length; i < l; i++) {
         var post = posts[i];
@@ -155,9 +159,20 @@ function createBlog(posts) {
             processed++;
             if(processed == posts.length) {
                 for(var k = 0, kl = posts.length; k < kl; k++) {
-                    postsHTML += posts[k].indexHTML;
+                  if (posts[k].settings.category == 'writing' && writingCount < 10) {
+                      writingHTML += posts[k].indexHTML;
+                      writingCount++;
+                  }
+                  if (posts[k].settings.category == 'update' && updatesCount < 5) {
+                      updatesHTML += posts[k].indexHTML;
+                      updatesCount++;
+                  }
+                  if (posts[k].settings.category == 'pen' && pensCount < 5) {
+                      pensHTML += posts[k].indexHTML;
+                      pensCount++;
+                  }
                 }
-                createIndex(postsHTML);
+                createIndex(writingHTML, updatesHTML, pensHTML);
             }
         })
     }
@@ -165,7 +180,6 @@ function createBlog(posts) {
 
 function createPostHTML(post, callback) {
     fs.readFile('site/content/templates/index/'+post.settings.type+'.html', 'utf8', function(err, template) {
-        console.log(err);
         var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
         for(var i = 0, l = toReplace.length; i < l; i++) {
             template = template.replace(toReplace[i], post.settings[toReplace[i]
@@ -176,9 +190,11 @@ function createPostHTML(post, callback) {
     });
 }
 
-function createIndex(postsHTML) {
+function createIndex(writingHTML, updatesHTML, pensHTML) {
     fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
-        indexTemplate = indexTemplate.replace('{{posts}}', postsHTML);
+        indexTemplate = indexTemplate.replace('{{writing}}', writingHTML);
+        indexTemplate = indexTemplate.replace('{{pens}}', pensHTML);
+        indexTemplate = indexTemplate.replace('{{updates}}', updatesHTML);
         fs.writeFile('build/index.html', indexTemplate, 'utf8');
     });
 }

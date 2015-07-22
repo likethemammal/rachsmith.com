@@ -1,5 +1,6 @@
 date:: 2014-07-01
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: Controlling the canvas with JavaScript Objects

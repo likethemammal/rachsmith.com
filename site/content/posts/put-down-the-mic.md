@@ -1,5 +1,6 @@
 date:: 2015-02-11
 type:: link
+category:: writing
 published:: true
 tags:: web
 title:: Put down the mic

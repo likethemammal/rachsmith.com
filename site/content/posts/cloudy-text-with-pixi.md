@@ -1,5 +1,6 @@
 date:: 2015-01-20
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: Cloudy Text with Pixi.js

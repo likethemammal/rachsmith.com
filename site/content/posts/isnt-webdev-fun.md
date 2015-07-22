@@ -1,5 +1,6 @@
 date:: 2014-07-14
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: Isn't webdev fun?

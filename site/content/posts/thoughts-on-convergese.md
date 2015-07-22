@@ -1,5 +1,6 @@
 date:: 2015-04-19
 type:: post
+category:: writing
 published:: true
 tags:: feels
 title:: Thoughts on Converge SE

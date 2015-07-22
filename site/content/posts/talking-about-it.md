@@ -1,5 +1,6 @@
 date:: 2015-06-11
 type:: post
+category:: writing
 published:: true
 tags:: feels
 title:: Talking about it

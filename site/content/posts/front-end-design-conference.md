@@ -1,5 +1,6 @@
 date:: 2014-07-20
 type:: post
+category:: writing
 published:: true
 tags:: code
 title:: Front End Design Conference 2014

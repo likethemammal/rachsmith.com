@@ -1,5 +1,6 @@
 date:: 2015-01-21
 type:: post
+category:: update
 published:: true
 tags:: code
 title:: I'll be presenting at Space City JS

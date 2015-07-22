@@ -1,5 +1,6 @@
 date:: 2015-04-21
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: A tip for my designer/CSS-wielding friends wanting to learn JavaScript

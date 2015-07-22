@@ -1,5 +1,6 @@
 date:: 2014-12-01
 type:: link
+category:: update
 published:: true
 tags:: code
 title:: A Fast Color Scheme Generator

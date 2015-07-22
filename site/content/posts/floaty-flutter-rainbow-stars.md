@@ -1,5 +1,6 @@
 date:: 2015-05-08
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: Floaty Flutter Rainbow Stars

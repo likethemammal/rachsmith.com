@@ -1,5 +1,6 @@
 date:: 2014-05-22
 type:: post
+category:: update
 published:: true
 tags:: code
 title:: This is real and it is important

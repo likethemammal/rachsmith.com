@@ -1,5 +1,6 @@
 date:: 2015-06-02
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: Hack Physics with JavaScript (part 1)

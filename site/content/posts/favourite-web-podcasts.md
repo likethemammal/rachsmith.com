@@ -1,5 +1,6 @@
 date:: 2015-06-22
 type:: post
+category:: update
 published:: true
 tags:: feels
 title:: My 5 Favourite web-related podcasts with Spoken

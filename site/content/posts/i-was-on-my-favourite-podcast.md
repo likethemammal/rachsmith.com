@@ -1,5 +1,6 @@
 date:: 2014-11-24
 type:: link
+category:: update
 published:: true
 tags:: code
 title:: I was on my favourite Podcast!

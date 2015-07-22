@@ -324,10 +324,10 @@ a {
     text-decoration: underline; }
 
 body {
-  font-family: 'Roboto Slab', serif; }
+  font-family: 'open-sans', Arial, sans-serif; }
 
 h1, h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'open-sans', sans-serif;
   font-weight: 400; }
 
 p {
@@ -345,7 +345,7 @@ header {
     color: #fff;
     font-size: 18px;
     line-height: 40px;
-    font-family: 'Roboto Slab', serif; }
+    font-family: 'open-sans', Arial, sans-serif; }
     header h2 a {
       color: #BCD8D8; }
 
@@ -371,7 +371,7 @@ footer {
         color: #fff;
         display: block;
         width: 100%;
-        font-family: 'Oswald', sans-serif;
+        font-family: 'open-sans', Arial, sans-serif;
         text-transform: uppercase;
         height: 30px; }
     footer .inner .about {

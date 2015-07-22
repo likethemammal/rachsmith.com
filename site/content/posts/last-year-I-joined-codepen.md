@@ -1,5 +1,6 @@
 date:: 2014-11-20
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: Last Year I Joined CodePen. What Happened Next Will Blow You Away

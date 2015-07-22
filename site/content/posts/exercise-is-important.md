@@ -1,5 +1,6 @@
 date:: 2015-01-13
 type:: post
+category:: writing
 published:: true
 tags:: code
 title:: Exercise is important, duh

@@ -1,5 +1,6 @@
 date:: 2015-05-31
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: THANKYOU to my first 1000 followers!

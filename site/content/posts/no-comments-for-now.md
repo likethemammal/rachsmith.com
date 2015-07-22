@@ -1,5 +1,6 @@
 date:: 2014-05-20
 type:: post
+category:: writing
 published:: true
 tags:: code
 title:: No comments for now

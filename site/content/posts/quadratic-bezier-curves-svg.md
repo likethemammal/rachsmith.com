@@ -1,5 +1,6 @@
 date:: 2015-05-18
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: Grokking quadratic bézier curves in SVG

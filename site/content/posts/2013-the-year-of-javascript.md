@@ -1,5 +1,6 @@
 date:: 2014-05-19
 type:: post
+category:: writing
 published:: true
 tags:: code
 title:: 2013: The year of JavaScript

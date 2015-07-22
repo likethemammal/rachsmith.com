@@ -1,5 +1,6 @@
 date:: 2015-06-12
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: Water drop loader CSS animation

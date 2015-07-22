@@ -1,5 +1,6 @@
 date:: 2014-09-21
 type:: codepen
+category:: pens
 published:: true
 tags:: code
 title:: RSS Feed to Post List Layout

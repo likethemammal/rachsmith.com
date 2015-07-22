@@ -1,5 +1,6 @@
 date:: 2015-06-16
 type:: codepen
+category:: writing
 published:: true
 tags:: code
 title:: Hack Physics and JavaScript (part 2) - solving triangles = profit

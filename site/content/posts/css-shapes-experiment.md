@@ -1,5 +1,6 @@
 date:: 2014-09-19
 type:: codepen
+category:: pen
 published:: true
 tags:: code
 title:: CSS Shapes Experiment (Chrome Only)

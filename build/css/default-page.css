@@ -324,10 +324,10 @@ a {
     text-decoration: underline; }
 
 body {
-  font-family: 'Roboto Slab', serif; }
+  font-family: 'open-sans', serif; }
 
 h1, h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'open-sans', sans-serif;
   font-weight: 400; }
 
 p {

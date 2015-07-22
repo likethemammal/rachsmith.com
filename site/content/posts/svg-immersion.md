@@ -1,5 +1,6 @@
 date:: 2015-06-16
 type:: link
+category:: update
 published:: true
 tags:: web
 title:: I was on SVG Immersion

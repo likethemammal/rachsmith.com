@@ -1,5 +1,6 @@
 date:: 2014-09-23
 type:: post
+category:: update
 published:: true
 tags:: code
 title:: Contributing to Codrops
