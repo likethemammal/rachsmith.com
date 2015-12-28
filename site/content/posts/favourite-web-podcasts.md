@@ -10,6 +10,8 @@ style:: default-post
 
 Decided to give the old <a href="https://spoken.co/t/2488149">spoken.co</a> a go and record this instead of blogging it. Looking forward to them allowing embeds so I can embed the recordings here on my site.
 
+<iframe src='https://spoken.co/t/2488149/embed' frameborder='0' width='100%' height='84' style='max-width:400px;'></iframe>
+
 If you don't want to listen here is the 5:
 1. <a href="http://shoptalkshow.com">ShopTalk Show</a>
 2. <a href="https://blog.codepen.io/radio/">CodePen Radio</a>

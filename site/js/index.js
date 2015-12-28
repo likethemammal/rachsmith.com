@@ -8,9 +8,8 @@ window.onload = function() {
     transparent:true,
   };
   var stage = new PIXI.Stage(0x66FF99);
-  var renderer = PIXI.autoDetectRenderer(window.innerWidth-15, 200, rendererOptions);
+  var renderer = PIXI.autoDetectRenderer(900, 200, rendererOptions);
   var header = document.getElementById('home-header');
-  console.log(document.getElementById('home-header').children);
   header.appendChild(renderer.view);
   renderer.view.className = 'pixi-canvas';
 

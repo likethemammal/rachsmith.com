@@ -5,11 +5,15 @@ var jsdom = require('jsdom');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var copy = require('gulp-copy');
+var minifyCss = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
+var RSS = require('rss');
 
 
 gulp.task('styles', function() {
     gulp.src('site/scss/*.scss')
         .pipe(sass())
+        .pipe(minifyCss())
         .pipe(gulp.dest('build/css'))
         .on('end', function() {
             console.log('styles updated');
@@ -24,15 +28,36 @@ gulp.task('watch', function() {
 gulp.task('update', function() {
     var posts = [];
     var processed = 0;
+
+  var feed = new RSS({
+    title: 'Rachel Smith',
+    description: 'The digital home of Rachel Smith, an Aussie Interactive Developer based in sunny California',
+    feed_url: 'http://rachsmith.com/rss.xml',
+    site_url: 'http://rachsmith.com',
+    image_url: 'http://rachsmith.com/icon.png',
+    managingEditor: 'Rachel Smith',
+    webMaster: 'Rachel Smith',
+    copyright: '2015 Rachel Smith',
+    language: 'en',
+    categories: ['Web Development'],
+    pubDate: pubDate(),
+    ttl: '60'
+  });
+
     // process posts
     fs.readdir('site/content/posts', function(err, files) {
+        var allPosts = [];
         for(var i = 0, l = files.length; i < l; i++) {
-            processMarkdown(files[i], 'posts', function(post) {
-                if(post.settings.published == 'true') posts.push(post);
-                if(post.settings.type != 'link' && post.settings.type != 'codepen') generateHTML(post, 'posts');
-                processed++;
-                if(processed == files.length) createBlog(posts);
-            });
+          processMarkdown(files[i], 'posts', function (post) {
+            if (post.settings.published == 'true') posts.push(post);
+            if (post.settings.type != 'link' && post.settings.type != 'codepen') generateHTML(post, 'posts');
+            allPosts.push(post);
+            processed++;
+            if (processed == files.length) {
+              createRSS(feed, allPosts);
+              createBlog(posts, feed);
+            }
+          });
         }
     });
 
@@ -45,12 +70,37 @@ gulp.task('update', function() {
         }
     });
 
-    gulp.src('site/js/**/*.js')
-        .pipe(copy('build', {prefix: 1}));
+
+    gulp.src('site/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('build/js', {prefix: 1}));
 
     gulp.src('site/img/**/*')
         .pipe(copy('build', {prefix: 1}));
+
+
 });
+
+function createRSS(feed, posts) {
+
+  posts.sort(function(a,b) {
+    return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
+  });
+
+  for (var i = 0; i < posts.length; i++) {
+    var post = posts[i];
+    feed.item({
+      title:  post.settings.title,
+      description: (post.settings.type == 'link' || post.settings.type == 'codepen') ? "" : post.settings.content,
+      url: (post.settings.type == 'link' || post.settings.type == 'codepen') ? post.settings.link : 'http://rachsmith.com/'+post.settings.url, // link to the item
+      categories: [post.settings.category], // optional - array of item categories
+      date: post.settings.date // any format that js Date can parse.
+    });
+  }
+
+  var xml = feed.xml();
+  fs.writeFile('build/rss.xml', xml, 'utf8');
+}
 
 function processMarkdown(filename, contentType, callback) {
     var post = {
@@ -102,29 +152,6 @@ function formatDate(date) {
 //    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
 }
 
-function getOrdinal(n) {
-    var s=["th","st","nd","rd"],
-        v=n%100;
-    return n+(s[(v-20)%10]||s[v]||s[0]);
-}
-
-function getMonthName(n) {
-    switch(n) {
-        case 1: return 'Jan'; break;
-        case 2: return 'Feb'; break;
-        case 3: return 'Mar'; break;
-        case 4: return 'Apr'; break;
-        case 5: return 'May'; break;
-        case 6: return 'Jun'; break;
-        case 7: return 'Jul'; break;
-        case 8: return 'Aug'; break;
-        case 9: return 'Sep'; break;
-        case 10: return 'Oct'; break;
-        case 11: return 'Nov'; break;
-        case 12: return 'Dec'; break;
-    }
-}
-
 function generateHTML(post, contentType) {
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
         var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
@@ -144,11 +171,12 @@ function writePost(post, template) {
     fs.writeFile('build/'+post.path+'/'+post.html, template, 'utf8');
 }
 
-function createBlog(posts) {
+function createBlog(posts, feed) {
     posts.sort(function(a,b) {
         return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
     });
     var writingCount = 0, updatesCount = 0, pensCount = 0;
+    var allHTML = '';
     var writingHTML = '';
     var updatesHTML = '';
     var pensHTML = '';
@@ -171,8 +199,11 @@ function createBlog(posts) {
                       pensHTML += posts[k].indexHTML;
                       pensCount++;
                   }
+                  allHTML += posts[k].indexHTML;
                 }
+
                 createIndex(writingHTML, updatesHTML, pensHTML);
+                createAllPage(allHTML);
             }
         })
     }
@@ -197,4 +228,37 @@ function createIndex(writingHTML, updatesHTML, pensHTML) {
         indexTemplate = indexTemplate.replace('{{updates}}', updatesHTML);
         fs.writeFile('build/index.html', indexTemplate, 'utf8');
     });
+}
+
+function createAllPage(allHTML) {
+  fs.readFile('site/content/templates/all/all.html', 'utf8', function(err, allTemplate) {
+    allTemplate = allTemplate.replace('{{all}}', allHTML);
+    fs.writeFile('build/all.html', allTemplate, 'utf8');
+  });
+}
+
+/**
+ * Get an RSS pubDate from a Javascript Date instance.
+ * @param Date - optional
+ * @return String
+ */
+function pubDate(date) {
+
+  if (typeof date === 'undefined') {
+    date = new Date();
+  }
+
+  var pieces     = date.toString().split(' '),
+    offsetTime = pieces[5].match(/[-+]\d{4}/),
+    offset     = (offsetTime) ? offsetTime : pieces[5],
+    parts      = [
+        pieces[0] + ',',
+      pieces[2],
+      pieces[1],
+      pieces[3],
+      pieces[4],
+      offset
+    ];
+
+  return parts.join(' ');
 }

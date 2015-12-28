@@ -1,0 +1,30 @@
+{
+  "firebase": "rachsmith",
+  "public": "build",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ],
+  "redirects": [
+    {"source":"/2015/portfolio-tips", "destination":"/2015/portfolio-tips.html", "type": 301},
+    {"source":"/2015/talking-about-it", "destination":"/2015/talking-about-it.html", "type": 301},
+    {"source":"/2015/favourite-web-podcasts", "destination":"/2015/favourite-web-podcasts.html", "type": 301},
+    {"source":"/2015/ill-be-presenting-at-spacecity-js", "destination":"/2015/ill-be-presenting-at-spacecity-js.html", "type": 301},
+    {"source":"/2015/thoughts-on-convergese", "destination":"/2015/thoughts-on-convergese.html", "type": 301},
+    {"source":"/2015/exercise-is-important", "destination":"/2015/exercise-is-important.html", "type": 301},
+    {"source":"/2014/contributing-to-codrops", "destination":"/2014/contributing-to-codrops.html", "type": 301},
+    {"source":"/2014/front-end-design-conference", "destination":"/2014/front-end-design-conference.html", "type": 301},
+    {"source":"/2014/living-in-venice", "destination":"/2014/living-in-venice.html", "type": 301},
+    {"source":"/2014/this-is-real-and-important", "destination":"/2014/this-is-real-and-important.html", "type": 301},
+    {"source":"/2014/no-comments-for-now", "destination":"/2014/no-comments-for-now.html", "type": 301},
+    {"source":"/2014/2013-the-year-of-javascript", "destination":"/2014/2013-the-year-of-javascript.html", "type": 301}
+
+
+
+
+
+
+  ]
+
+}
