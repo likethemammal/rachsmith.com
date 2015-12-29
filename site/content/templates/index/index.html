@@ -5,8 +5,7 @@
     <title>Rachel Smith</title>
     <meta name="description" content="The online home of Rachel Smith, and Australian Interactive Developer based in Sunny California">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='css/index.css' rel='stylesheet' type='text/css'>
-    <!-- HEY -->
+    <!--<link href='css/index.css' rel='stylesheet' type='text/css'>-->
 </head>
 <body>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" width="100" height="100">
@@ -25,34 +24,19 @@
     </symbol>
   </svg>
     <header class="home-header" id="home-header">
-      <canvas class="canvas" id="canvas" width="700" height="200"></canvas>
       <h1><a href="./index.html">Rachel Smith</a></h1>
-        <p>That's my name. Writing these personal taglines/bios about yourself is always weird.
-          I write blog posts sometimes but I wouldn't call myself a writer. I speak sometimes but probably not enough to label myself a speaker.
-          I'm a developer who dreams of a well-animated web. And colourful stars. Lots of colourful stars.
-        </p>
+        <p>You've ended up at the digital home of me! - a beer drinking, makeup tutorial watching, leggings addicted web developer who currently wrangles CSS & JavaScript for <a href="http://codepen.io">CodePen</a>. I dream of a well-animated web in which we are all very nice to each other &#x1f495; </p>
+        <p>This is where I post about my personal thoughts or what I've been up to lately, if you're looking for posts specific to coding I write about that over on my <a href="http://codepen.io/rachsmith/published">CodePen blog</a>.</p>
     </header>
     <main>
-        <section class="writing">
-            <h2>Latest Writing</h2>
-            {{writing}}
-        </section>
-
-
-        <section class="updates">
-            <h2>Latest Updates & Links</h2>
-            {{updates}}
-        </section>
-
-        <section class="pens">
-            <h2>Latest Pens</h2>
-            {{pens}}
+        <section class="posts">
+            {{posts}}
         </section>
 
       <section class="all">
         <a href="all.html" class="all-posts">SEE ALL POSTS</a>
         <a href="rss.xml" class="rss"> RSS
-          <svg class="icon rss">
+        <svg width="30" height="30" class="icon rss">
           <use xlink:href="#icon-rss"></use>
         </svg> </a>
         <a href="https://twitter.com/rachsmithtweets" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @rachsmithtweets</a>
@@ -63,9 +47,12 @@
     <footer>
       <div class="inner">
         <h2>Say hey</h2>
-        <p>If you're wanting to get in touch and you're not a recruiter or a creep I'm pretty chatty over at
+        <p>If you're wanting to get in touch I'm pretty chatty over at
           <a class="footer-link" href="http://twitter.com/rachsmithtweets">Twitter</a>. Otherwise you can send me
           an email at contact at rachsmith dot com.</p>
+        <p>If you're a fellow designer or dev with a question for me I'd love you to submit it over at my <a href="https://github.com/rachsmithcodes/ama">Github AMA</a>.</p>
+        <p>Please note I am not looking for a new job and am not taking on any freelance work at this time so emailing me about that would just be a waste of your time :)</p>
+
       </div>
     </footer>
 
