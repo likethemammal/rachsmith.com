@@ -6,6 +6,6 @@ tags:: code
 title:: Quick performance tip: JavaScript Objects and the Memory heap
 link:: http://codepen.io/rachsmith/blog/quick-performance-tip-javascript-objects-and-memory
 
-#Quick performance tip: JavaScript Objects and the Memory heap
+# Quick performance tip: JavaScript Objects and the Memory heap
 
 .

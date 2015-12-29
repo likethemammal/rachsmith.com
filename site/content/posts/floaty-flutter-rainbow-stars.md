@@ -6,6 +6,6 @@ tags:: code
 title:: Floaty Flutter Rainbow Stars
 link:: http://codepen.io/rachsmith/pen/JdYemy
 
-#Floaty Flutter Rainbow Stars
+# Floaty Flutter Rainbow Stars
 
 Some rainbow stars for rainbow star day over at CodePen :)

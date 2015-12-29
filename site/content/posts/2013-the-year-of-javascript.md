@@ -6,7 +6,7 @@ tags:: code
 title:: 2013: The year of JavaScript
 style:: default-post
 
-#2013: The year of JavaScript
+# 2013: The year of JavaScript
 
 *This week, I managed to wipe out my previous installation of Ghost along with all of my content. This post, I had saved as a draft elsewhere which is just as well as it was easily the most popular post on my site.*
 ***************
@@ -28,28 +28,28 @@ I always 'knew' that 'everything is an object' in JavaScript because that is wha
 
 I am a great believer in the theory that things don't just happen to people. Most of the time, what happens to you is a direct or indirect result of your own actions. *You are the creator of your own destiny* or whatever wanky way you want to put it. I knew I wanted a career in JavaScript specifically, but I had to learn a few lessons along the way in order to achieve it.
 
-###Choose your poison, and then stick to it
+### Choose your poison, and then stick to it
 You probably are aware of the phrase 'Jack of many trades, master of none'? This all too often applies to junior and mid-level developers and I was no exception. My university degree had covered front end and back end technologies and my first full time professional role as  a developer for an advertising agency had me working on Flash, HTML, CSS, Javascript, PHP and MySQL. I was confident enough in all of these areas but had huge holes in my knowledge of each. 
 
 Eventually I figured out my real passion was for writing JavaScript. When I quit my job in favour for Contract work in the UK I decided I would only take on JS-centric roles as much as possible. 
 
-###Real learning takes time and effort
+### Real learning takes time and effort
 This is the hardest lesson to swallow. How often do we repeat the phrase "I would love to do X, if only I had the time"? I had to make the time. In London I was working a regular 40 hour week (sometimes more) on client work. So I would come home from work, make dinner, then spend another few hours on the computer doing my *study*. I would build things on my weekends. Most of the time I spent coding I would otherwise have spent watching TV or playing Candy Crush. When I replaced these mindless activites with productive ones I felt like I was getting so much more out of my week.
 
-###Replace "it can't be done" with "maybe I can do it".
+### Replace "it can't be done" with "maybe I can do it".
 My friends who work in Digital Producer roles have often said that the most frustrating thing a developer can do is constantly turn down client requests because they are "too difficult" or "can't be done". I had been guilty of this behaviour myself. I had to change my attitude. When a manager or producer came and asked me to do something I had no idea how to do instead of saying "no" I would say "I will try" and then commence Googling like a mad woman on how to attack the problem. On almost all of these occasions I would figure it out, the manager/client would be stoked with the result, and I had just learned something new. Everybody won. 
 
-###Actively seek to learn from others...
+### Actively seek to learn from others...
 While contracting in the UK I was priveledged enough to work with many different developers. Some were much stronger than me in certain areas and others not as strong, all were extremely beneficial to my learning experience. Good code examples mean nothing to us unless we understand **why** they are good. Although it was painful at the time, *picking through other people's terrible JavaScript realy helped me deepen my understanding of the language*. Developers can be an opinionated bunch, and sometimes its easy to disregard other's opinions on what constitutes good code when they don't match yours. I had to drop the natural defensiveness and take on every criticism as a learning experience.
 
 >Humility is by far one of the most important ingredients of true learning.
 
 After one of my contracts expired, my former employer actually sent me a list written by the lead developer with a no-holds-barred list of criticisms about the code I had written. My initial thought was, "well who the f*ck nominated you the Lord Commander of code?!" and then "I only did x y z because of a b c excuses". Then, I remembered I should be treating this as an opportunity, I really thought about everything he had to say, and I know my future work will improve a result. **Humility** is by far one of the most important ingredients of true learning.
 
-###... but challenge everything you're told.
+### ... but challenge everything you're told.
 As we grow as developers we form opinions on how best to code based on what we read online, or what our colleagues tell us. I worked with guys who used a lot of libraries so as not to 're-invent' the wheel and other guys who insisted on writing everything from scratch. There were guys obsessed with performance and guys who placed application architecture at the top of their priorities. I listened to their justifications about the way they developed, and then would go away and do my own research. Rather than take on others' suggestions at face value I would form my own opinions, and I'm a better developers as a result.
 
-###Stay connected, and be a nice person!
+### Stay connected, and be a nice person!
 I can quite confidently say the I would not be the developer I am now if it weren't for Twitter. Unlike my other social networks that I use purely to keep up with friends, Twitter is an integral part of me staying 'on the pulse' in my field. Through Twitter I have can have open discourse with so many people I admire in this industry and that sort of resource is invaluable.
 
 Whether connecting with people online or in real life. It has been super beneficial for me to make an extra to be a nice and friendly person. Call it karma or whatever, but whenever I have made that bit of extra effort to reach out and compliment other people on their good work, or respond to people who have engaged with me, I feel like I have received even more positivity in return. Every positive connection provides an opportunity, whether we immediately see it or not.

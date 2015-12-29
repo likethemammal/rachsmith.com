@@ -6,6 +6,6 @@ tags:: code
 title:: I was on the Grumpy Developer Podcast (ep 46)
 link:: https://itunes.apple.com/us/podcast/grumpy-developer-podcast-tech/id1006525170?mt=2
 
-#I was on the Grumpy Developer Podcast (ep 46)
+# I was on the Grumpy Developer Podcast (ep 46)
 
 .

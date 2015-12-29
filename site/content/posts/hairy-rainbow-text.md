@@ -6,6 +6,6 @@ tags:: code
 title:: Hairy Rainbow Text
 link:: http://codepen.io/rachsmith/details/VLBQbe/
 
-#Hairy Rainbow Text
+# Hairy Rainbow Text
 
 .

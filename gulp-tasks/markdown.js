@@ -10,7 +10,6 @@ module.exports = function (gulp) {
                 html: filename.replace('md', 'html'),
                 settings: {}
             }
-
             fs.readFile('site/content/'+contentType+'/'+post.md, 'utf8', function(err, data) {
                 var lines = data.split('\n');
                 var postContent = '';
@@ -25,20 +24,21 @@ module.exports = function (gulp) {
 
                 post.path = post.settings.type == 'post' ? post.settings.date.split('-')[0] : '';
 
-                fs.writeFile(post.md, postContent, 'utf8', function () {
-                    gulp.src(post.md)
+                fs.writeFile('processing/'+post.md, postContent, 'utf8', function () {
+                    gulp.src('processing/'+post.md)
                         .pipe(markdown())
-                        .pipe(gulp.dest(''))
+                        .pipe(gulp.dest('processing'))
                         .on('end', function () {
-                            fs.readFile(post.html, 'utf8', function (err, content) {
+                            fs.readFile('processing/'+post.html, 'utf8', function (err, content) {
                                 post.settings.content = content;
+                                //console.log(content);
                                 jsdom.env(content, function (errors, window) {
                                     post.settings.extract = window.document.getElementsByTagName('p')[0].innerHTML;
                                     post.settings.url = post.path + '/' + post.html;
                                     window.close();
                                     callback(post);
-                                    fs.unlink(post.md);
-                                    fs.unlink(post.html);
+                                    //fs.unlink(post.md);
+                                    //fs.unlink(post.html);
                                 });
                             });
                         });

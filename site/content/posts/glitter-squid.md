@@ -6,6 +6,6 @@ tags:: code
 title:: glitter squid (svg + canvas)
 link:: http://codepen.io/rachsmith/pen/MwNOBY/
 
-#glitter squid (svg + canvas)
+# glitter squid (svg + canvas)
 
 .

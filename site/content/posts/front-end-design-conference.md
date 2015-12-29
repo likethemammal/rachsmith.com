@@ -6,7 +6,7 @@ tags:: code
 title:: Front End Design Conference 2014
 style:: default-post
 
-#Front End Design Conference 2014
+# Front End Design Conference 2014
 
 Earlier this year, Dan Denney asked if I would like to speak at this year's [Front End Design Conference](http://frontenddesignconference.com/) in St Petersburg, Florida. Being fairly new to the USA I jumped at the chance to share and connect with the Front End community in this fine country.
 

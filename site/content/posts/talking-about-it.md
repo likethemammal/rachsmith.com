@@ -6,7 +6,7 @@ tags:: feels
 title:: Talking about it
 style:: default-post
 
-#Talking about it
+# Talking about it
 
 My father had type 1 bipolar disorder. He was very sick with the illness before eventually losing his life to suicide. I was 12 when he died. I'm pretty matter of fact about telling people this when they ask about him. In my mind, my father's death was not really different to my mother's which was due to an aggressive brain tumour. They both got sick, the doctors couldn't cure them, they died from the illness.
 

@@ -6,6 +6,6 @@ tags:: code
 title:: Flinging Particles
 link:: http://codepen.io/rachsmith/pen/kEwrj
 
-#Flinging Particles
+# Flinging Particles
 
 hack physics for fun and profit.

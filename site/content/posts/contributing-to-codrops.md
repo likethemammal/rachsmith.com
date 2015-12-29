@@ -6,7 +6,7 @@ tags:: code
 title:: Contributing to Codrops
 style:: default-post
 
-#Contributing to Codrops
+# Contributing to Codrops
 
 Back in 2010 when I decided I wanted to be a 'web designer' and was learning the basics of HTML and CSS my then-boyfriend-now-husband told me I should check out this blog called Codrops for tutorials. This was before css transitions had entered the mainstream and everyone was animating with jQuery and I remember just being *blown away* by how awesome their demos and tutorials were. I have been using them as an inspiration source ever since then. 
 

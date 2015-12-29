@@ -6,7 +6,7 @@ tags:: code
 title:: Just one of many things I like about living in Venice
 style:: default-post
 
-#Just one of many things I like about living in Venice
+# Just one of many things I like about living in Venice
 
 I have a little bike that I use to get to and from work. I love it because it is light as a feather and takes up no space in our apartment. However the wheels are very small and as a result there is a lot of peddling going on while getting from A to B, and hills are a nightmare.
 

@@ -6,7 +6,7 @@ tags:: code
 title:: Exercise is important, duh
 style:: default-post
 
-#Exercise is important, duh
+# Exercise is important, duh
 
 Lately I've been feeling in a bit of a rut creatively. I've just felt so blah and only have the mental energy to get my day job done, let alone any side projects. Over the past week I've been doing some soul searching to try and figure out what is bothering me. Is it work? Am I drinking too much? Should I stop obsessively playing Family Guy Quest For Stuff on my iPhone?
 

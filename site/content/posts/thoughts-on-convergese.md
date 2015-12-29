@@ -6,7 +6,7 @@ tags:: feels
 title:: Thoughts on Converge SE
 style:: default-post
 
-#Thoughts on Converge SE
+# Thoughts on Converge SE
 
 Wow I'm actually blogging. This is happening. April has been totally bananas. 2015 has been non-stop for Active Theory and I had a huge site launch for the first weekend of Coachella, followed almost immediately by flying out to South Carolina to debut a new talk for Converge SE. Although everything has gone amazingly well I am now the definition of wrecked. As such I’m not really capable of stringing together a coherent write up but I wanted to get some thoughts down & reflect before life flies on and suddenly it is 6 months later and I’ve forgotten what even happened to me. Heads up: it's basically just going to be a bunch of feels.
 

@@ -6,7 +6,7 @@ tags:: code
 title:: No comments for now
 style:: default-post
 
-#No comments for now
+# No comments for now
 
 Getting a new build of the site up, I was questioning whether to include Disqus comments in this version. I decided against it.
 
