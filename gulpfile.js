@@ -1,19 +1,20 @@
 var gulp = require('gulp');
-var markdown = require('gulp-markdown');
 var fs = require('fs');
-var jsdom = require('jsdom');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var copy = require('gulp-copy');
 var minifyCss = require('gulp-cssnano');
 var uglify = require('gulp-uglify');
-var RSS = require('rss');
 var livereload = require('gulp-livereload');
 
 var EXPRESS_PORT = 4000;
 var EXPRESS_ROOT = __dirname+'/build';
 var LIVERELOAD_PORT = 35729;
 var lr;
+
+var md = require('./gulp-tasks/markdown')(gulp);
+var rss = require('./gulp-tasks/rss')(gulp);
+
 
 function startExpress() {
     var express = require('express');
@@ -61,33 +62,21 @@ gulp.task('update', function() {
     var posts = [];
     var processed = 0;
 
-  var feed = new RSS({
-    title: 'Rachel Smith',
-    description: 'The digital home of Rachel Smith, an Aussie Interactive Developer based in sunny California',
-    feed_url: 'http://rachsmith.com/rss.xml',
-    site_url: 'http://rachsmith.com',
-    image_url: 'http://rachsmith.com/icon.png',
-    managingEditor: 'Rachel Smith',
-    webMaster: 'Rachel Smith',
-    copyright: '2015 Rachel Smith',
-    language: 'en',
-    categories: ['Web Development'],
-    pubDate: pubDate(),
-    ttl: '60'
-  });
+    // init feed
+    rss.initiate();
 
     // process posts
     fs.readdir('site/content/posts', function(err, files) {
         var allPosts = [];
         for(var i = 0, l = files.length; i < l; i++) {
-          processMarkdown(files[i], 'posts', function (post) {
+          md.process(files[i], 'posts', function (post) {
             if (post.settings.published == 'true') posts.push(post);
             if (post.settings.type != 'link' && post.settings.type != 'codepen') generateHTML(post, 'posts');
             allPosts.push(post);
             processed++;
             if (processed == files.length) {
-              createRSS(feed, allPosts);
-              createBlog(posts, feed);
+              rss.create(allPosts);
+              createBlog(posts);
             }
           });
         }
@@ -96,12 +85,11 @@ gulp.task('update', function() {
     // process pages
     fs.readdir('site/content/pages', function(err, files) {
         for(var i = 0, l = files.length; i < l; i++) {
-            processMarkdown(files[i], 'pages', function(page) {
+            md.process(files[i], 'pages', function(page) {
                 generateHTML(page, 'pages');
             });
         }
     });
-
 
     gulp.src('site/js/*.js')
         .pipe(uglify())
@@ -110,80 +98,9 @@ gulp.task('update', function() {
 
     gulp.src('site/img/**/*')
         .pipe(copy('build', {prefix: 1}));
-
-
 });
 
-function createRSS(feed, posts) {
 
-  posts.sort(function(a,b) {
-    return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
-  });
-
-  for (var i = 0; i < posts.length; i++) {
-    var post = posts[i];
-    feed.item({
-      title:  post.settings.title,
-      description: (post.settings.type == 'link' || post.settings.type == 'codepen') ? "" : post.settings.content,
-      url: (post.settings.type == 'link' || post.settings.type == 'codepen') ? post.settings.link : 'http://rachsmith.com/'+post.settings.url, // link to the item
-      categories: [post.settings.category], // optional - array of item categories
-      date: post.settings.date // any format that js Date can parse.
-    });
-  }
-
-  var xml = feed.xml();
-  fs.writeFile('build/rss.xml', xml, 'utf8');
-}
-
-function processMarkdown(filename, contentType, callback) {
-    var post = {
-        md: filename,
-        html: filename.replace('md', 'html'),
-        settings: {}
-    }
-
-    fs.readFile('site/content/'+contentType+'/'+post.md, 'utf8', function(err, data) {
-        var lines = data.split('\n');
-        var postContent = '';
-        for(var i = 0, l = lines.length; i < l; i++) {
-            var setting = lines[i].match('(.*)\::');
-            if (setting) {
-                post.settings[setting[1]] = lines[i].split(setting[0] + ' ')[1];
-                if(setting[1] == 'date') post.settings.formattedDate = formatDate(post.settings.date);
-            }
-            else postContent += lines[i] + '\n';
-        }
-
-        post.path = post.settings.type == 'post' ? post.settings.date.split('-')[0] : '';
-
-        fs.writeFile(post.md, postContent, 'utf8', function() {
-            gulp.src(post.md)
-                .pipe(markdown())
-                .pipe(gulp.dest(''))
-                .on('end', function() {
-                    fs.readFile(post.html, 'utf8', function(err, content) {
-                        post.settings.content = content;
-                        jsdom.env(content, function (errors, window) {
-                            post.settings.extract = window.document.getElementsByTagName('p')[0].innerHTML;
-                            post.settings.url = post.path+'/'+post.html;
-                            window.close();
-                            callback(post);
-                            fs.unlink(post.md);
-                            fs.unlink(post.html);
-                        });
-                    });
-                });
-        });
-
-    });
-}
-
-function formatDate(date) {
-    var dateSplit = date.split('-').join('&#8226;');
-    return dateSplit;
-
-//    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
-}
 
 function generateHTML(post, contentType) {
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
@@ -204,15 +121,11 @@ function writePost(post, template) {
     fs.writeFile('build/'+post.path+'/'+post.html, template, 'utf8');
 }
 
-function createBlog(posts, feed) {
+function createBlog(posts) {
     posts.sort(function(a,b) {
         return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
     });
-    var writingCount = 0, updatesCount = 0, pensCount = 0;
     var allHTML = '';
-    var writingHTML = '';
-    var updatesHTML = '';
-    var pensHTML = '';
     var processed = 0;
     for(var i = 0, l = posts.length; i < l; i++) {
         var post = posts[i];
@@ -220,22 +133,9 @@ function createBlog(posts, feed) {
             processed++;
             if(processed == posts.length) {
                 for(var k = 0, kl = posts.length; k < kl; k++) {
-                  if (posts[k].settings.category == 'writing' && writingCount < 10) {
-                      writingHTML += posts[k].indexHTML;
-                      writingCount++;
-                  }
-                  if (posts[k].settings.category == 'update' && updatesCount < 5) {
-                      updatesHTML += posts[k].indexHTML;
-                      updatesCount++;
-                  }
-                  if (posts[k].settings.category == 'pen' && pensCount < 5) {
-                      pensHTML += posts[k].indexHTML;
-                      pensCount++;
-                  }
                   allHTML += posts[k].indexHTML;
                 }
-
-                createIndex(writingHTML, updatesHTML, pensHTML);
+                createIndex(allHTML);
                 createAllPage(allHTML);
             }
         })
@@ -254,11 +154,9 @@ function createPostHTML(post, callback) {
     });
 }
 
-function createIndex(writingHTML, updatesHTML, pensHTML) {
+function createIndex(allHTML) {
     fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
-        indexTemplate = indexTemplate.replace('{{writing}}', writingHTML);
-        indexTemplate = indexTemplate.replace('{{pens}}', pensHTML);
-        indexTemplate = indexTemplate.replace('{{updates}}', updatesHTML);
+        indexTemplate = indexTemplate.replace('{{posts}}', allHTML);
         fs.writeFile('build/index.html', indexTemplate, 'utf8');
     });
 }
@@ -270,28 +168,3 @@ function createAllPage(allHTML) {
   });
 }
 
-/**
- * Get an RSS pubDate from a Javascript Date instance.
- * @param Date - optional
- * @return String
- */
-function pubDate(date) {
-
-  if (typeof date === 'undefined') {
-    date = new Date();
-  }
-
-  var pieces     = date.toString().split(' '),
-    offsetTime = pieces[5].match(/[-+]\d{4}/),
-    offset     = (offsetTime) ? offsetTime : pieces[5],
-    parts      = [
-        pieces[0] + ',',
-      pieces[2],
-      pieces[1],
-      pieces[3],
-      pieces[4],
-      offset
-    ];
-
-  return parts.join(' ');
-}
