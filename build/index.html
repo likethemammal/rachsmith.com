@@ -5,7 +5,7 @@
     <title>Rachel Smith</title>
     <meta name="description" content="The online home of Rachel Smith, and Australian Interactive Developer based in Sunny California">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link href='css/index.css' rel='stylesheet' type='text/css'>-->
+    <link href='css/index.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" width="100" height="100">
@@ -24,10 +24,16 @@
     </symbol>
   </svg>
     <header class="home-header" id="home-header">
-      <h1><a href="./index.html">Rachel Smith</a></h1>
+      <div class="background"></div>
+
+      <h1><a href="./index.html">Rachel<br/>Smith</a></h1>
         <p>You've ended up at the digital home of me! - a beer drinking, makeup tutorial watching, leggings addicted web developer who currently wrangles CSS & JavaScript for <a href="http://codepen.io">CodePen</a>. I dream of a well-animated web in which we are all very nice to each other &#x1f495; </p>
         <p>This is where I post about my personal thoughts or what I've been up to lately, if you're looking for posts specific to coding I write about that over on my <a href="http://codepen.io/rachsmith/published">CodePen blog</a>.</p>
     </header>
+    <section class="ama">
+      <p>Got a burning question for me? check out my <a href="http://github.com">github AMA</a>.</p>
+      
+    </section>
     <main>
         <section class="posts">
             <article class="home-post link">
@@ -131,15 +137,6 @@ When I thought about it I realized, yes, yes I do. So instead of just tweeting b
 </article><article class="home-post link">
     <header class="home-article-header">
         <p class="published">2015&#8226;06&#8226;16</p>
-        <h3><a class="home-post-title" href="http://svgimmersion.com">
-            <svg width="30" height="30" class="icon">
-            <use xlink:href="#icon-link" />
-            </svg> I was on SVG Immersion</a>
-            </h3>
-    </header>
-</article><article class="home-post link">
-    <header class="home-article-header">
-        <p class="published">2015&#8226;06&#8226;16</p>
         <h3><a class="home-post-title" href="http://codepen.io/rachsmith/blog/hack-physics-and-javascript-part-2-solving-triangles-profit">
             <svg width="30" height="30"  class="icon codepen">
             <use xlink:href="#codepen-logo"></use>
@@ -147,6 +144,15 @@ When I thought about it I realized, yes, yes I do. So instead of just tweeting b
             </h3>
     </header>
 
+</article><article class="home-post link">
+    <header class="home-article-header">
+        <p class="published">2015&#8226;06&#8226;16</p>
+        <h3><a class="home-post-title" href="http://svgimmersion.com">
+            <svg width="30" height="30" class="icon">
+            <use xlink:href="#icon-link" />
+            </svg> I was on SVG Immersion</a>
+            </h3>
+    </header>
 </article><article class="home-post link">
     <header class="home-article-header">
         <p class="published">2015&#8226;06&#8226;12</p>
@@ -437,11 +443,41 @@ When I thought about it I realized, yes, yes I do. So instead of just tweeting b
       </section>
 
     </main>
-    {{footer}}
+    <footer>
+  <div class="inner">
+    <h2>Say hey</h2>
+    <p>If you're wanting to get in touch I'm pretty chatty over at
+      <a class="footer-link" href="http://twitter.com/rachsmithtweets">Twitter</a>. Otherwise you can send me
+      an email at contact at rachsmith dot com.</p>
+    <p>If you're a fellow designer or dev with a question for me I'd love you to submit it over at my <a href="https://github.com/rachsmithcodes/ama">Github AMA</a>.</p>
+    <p>Please note I am not looking for a new job and am not taking on any freelance work at this time so emailing me about that would just be a waste of your time :)</p>
 
-    <script src="js/lib/pixi.min.js"></script>
-    <script src="js/index.js"></script>
+  </div>
+</footer>
 
-    {{scripts}}
+    <!--<script src="js/lib/pixi.min.js"></script>-->
+    <!--<script src="js/index.js"></script>-->
+
+    <script>
+  (function(d) {
+    var config = {
+          kitId: 'mzw2lzq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66382585-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

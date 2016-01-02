@@ -54,7 +54,6 @@ module.exports = function (gulp, rss, md) {
 function generateHTML(post, contentType) {
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
         var toReplace = template.match(new RegExp('\{{(.*?)\}}', 'g'));
-        console.log(post.settings);
         for(var i = 0, l = toReplace.length; i < l; i++) {
             template = template.replace(toReplace[i], post.settings[toReplace[i]
                     .replace(new RegExp('\{{|\}}', 'g'), '')] || '');
@@ -107,8 +106,12 @@ function createPostHTML(post, callback) {
 }
 
 function createIndex(allHTML) {
+    var scripts = fs.readFileSync('site/content/templates/shared/scripts.html', 'utf8');
+    var footer = fs.readFileSync('site/content/templates/shared/footer.html', 'utf8');
     fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
         indexTemplate = indexTemplate.replace('{{posts}}', allHTML);
+        indexTemplate = indexTemplate.replace('{{scripts}}', scripts);
+        indexTemplate = indexTemplate.replace('{{footer}}', footer);
         fs.writeFile('build/index.html', indexTemplate, 'utf8');
     });
 }

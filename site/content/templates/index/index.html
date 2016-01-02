@@ -5,7 +5,7 @@
     <title>Rachel Smith</title>
     <meta name="description" content="The online home of Rachel Smith, and Australian Interactive Developer based in Sunny California">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link href='css/index.css' rel='stylesheet' type='text/css'>-->
+    <link href='css/index.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" width="100" height="100">
@@ -24,10 +24,16 @@
     </symbol>
   </svg>
     <header class="home-header" id="home-header">
-      <h1><a href="./index.html">Rachel Smith</a></h1>
+      <div class="background"></div>
+
+      <h1><a href="./index.html">Rachel<br/>Smith</a></h1>
         <p>You've ended up at the digital home of me! - a beer drinking, makeup tutorial watching, leggings addicted web developer who currently wrangles CSS & JavaScript for <a href="http://codepen.io">CodePen</a>. I dream of a well-animated web in which we are all very nice to each other &#x1f495; </p>
         <p>This is where I post about my personal thoughts or what I've been up to lately, if you're looking for posts specific to coding I write about that over on my <a href="http://codepen.io/rachsmith/published">CodePen blog</a>.</p>
     </header>
+    <section class="ama">
+      <p>Got a burning question for me? check out my <a href="http://github.com">github AMA</a>.</p>
+
+    </section>
     <main>
         <section class="posts">
             {{posts}}
@@ -46,8 +52,8 @@
     </main>
     {{footer}}
 
-    <script src="js/lib/pixi.min.js"></script>
-    <script src="js/index.js"></script>
+    <!--<script src="js/lib/pixi.min.js"></script>-->
+    <!--<script src="js/index.js"></script>-->
 
     {{scripts}}
 </body>

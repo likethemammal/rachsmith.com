@@ -16,7 +16,6 @@ var md = require('./gulp-tasks/markdown')(gulp);
 var rss = require('./gulp-tasks/rss')(gulp);
 var blog = require('./gulp-tasks/blog')(gulp, rss, md);
 
-
 function startExpress() {
     var express = require('express');
     var app = express();
@@ -55,8 +54,8 @@ gulp.task('styles', function() {
 
 gulp.task('watch', function() {
     gulp.watch('site/scss/*.scss', ['styles']);
-    gulp.watch('site/**/*', ['update']);
-    gulp.watch('*.html', notifyLivereload);
+    gulp.watch('site/**/*.html', ['update']);
+    gulp.watch('build/*.html', notifyLivereload);
 });
 
 gulp.task('update', function() {
