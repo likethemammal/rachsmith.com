@@ -1,39 +1,72 @@
 var fs = require('fs');
 var posts = [];
-var processed = 0;
+var patterns = 4;
+var colors = ['#3d3b7d', '#0d0630', '#f03a47', '#40a189', '#8c1a6a'];
 
 module.exports = function (gulp, rss, md) {
     return {
         processPosts: function() {
             // process posts
+            var indexPattern = 1;
+            var postPattern = 1;
+            var color = 0;
             fs.readdir('site/content/posts', function (err, files) {
                 var scripts = fs.readFileSync('site/content/templates/shared/scripts.html', 'utf8');
                 var footer = fs.readFileSync('site/content/templates/shared/footer.html', 'utf8');
                 var allPosts = [], writtenPosts = [];
-                for (var i = 0, l = files.length; i < l; i++) {
-                    md.process(files[i], 'posts', function (post) {
+                processPosts(files, function(posts) {
+                    posts.sort(function(a,b) {
+                        return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
+                    });
+
+                    for (var i = 0; i < posts.length; i++) {
+                        var post = posts[i];
                         post.settings.scripts = scripts;
                         post.settings.footer = footer;
-                        if (post.settings.published == 'true') posts.push(post);
-                        if (post.settings.type != 'link' && post.settings.type != 'codepen') {
+                        if (post.settings.published != 'true') continue;
+                        if (post.settings.type == 'post') {
+                            post.settings.cssClass = 'pattern-'+postPattern;
+                            post.settings.backgroundColor = colors[color];
+                            color++;
+                            postPattern++;
+                            if (color >= colors.length) color = 0;
+                            if (postPattern > patterns) postPattern = 1;
                             writtenPosts.push(post);
+                        } else {
+                            post.settings.cssClass = 'pattern-'+indexPattern;
+                            indexPattern++;
+                            if (indexPattern > patterns) indexPattern = 1;
                         }
                         allPosts.push(post);
-                        processed++;
-                        if (processed == files.length) {
-                            createHTML();
-                            rss.create(allPosts);
-                            createBlog(posts);
-                        }
-                    });
+                    }
+
+                    createHTML();
+                    rss.create(allPosts);
+                    createBlog(allPosts);
+                })
+
+                function processPosts(files, callback) {
+                    var processed = 0;
+                    var posts = [];
+                    for (var i = 0, l = files.length; i < l; i++) {
+                        md.process(files[i], 'posts', function (post) {
+                            processed++;
+                            posts.push(post);
+                            if (posts.length == files.length) {
+                                callback(posts);
+                            }
+                        });
+                    }
                 }
 
                 function createHTML() {
                     for (var i = 0; i < writtenPosts.length; i++) {
-                        if (writtenPosts[i-1] && writtenPosts[i-1].settings.url) writtenPosts[i].settings['prev-url'] = writtenPosts[i-1].settings.url;
-                        if (writtenPosts[i-1] && writtenPosts[i-1].settings.title) writtenPosts[i].settings['prev-title'] = writtenPosts[i-1].settings.title;
-                        if (writtenPosts[i+1] && writtenPosts[i+1].settings.url) writtenPosts[i].settings['next-url'] = writtenPosts[i+1].settings.url;
-                        if (writtenPosts[i+1] && writtenPosts[i+1].settings.title) writtenPosts[i].settings['next-title'] = writtenPosts[i+1].settings.title;
+                        if (writtenPosts[i-1] && writtenPosts[i-1].settings.url && writtenPosts[i-1].settings.title) {
+                            writtenPosts[i].settings['prev-link'] = '<section class="post-link prev"><p>Previous thought: <a href="'+writtenPosts[i-1].settings.url+'">'+writtenPosts[i-1].settings.title+'</a></p></section>';
+                        }
+                        if (writtenPosts[i+1] && writtenPosts[i+1].settings.url && writtenPosts[i+1].settings.title) {
+                            writtenPosts[i].settings['next-link'] = '<section class="post-link next"><p>Next thought: <a href="'+writtenPosts[i+1].settings.url+'">'+writtenPosts[i+1].settings.title+'</a></p></section>';
+                        }
                         generateHTML(writtenPosts[i], 'posts');
                     }
                 }
@@ -50,6 +83,7 @@ module.exports = function (gulp, rss, md) {
         }
     }
 };
+
 
 function generateHTML(post, contentType) {
     fs.readFile('site/content/templates/'+contentType+'/'+post.settings.type+'.html', 'utf8', function(err, template) {
@@ -71,19 +105,20 @@ function writePost(post, html) {
 }
 
 function createBlog(posts) {
-    posts.sort(function(a,b) {
-        return b.settings.date.split('-').join('') - a.settings.date.split('-').join('');
-    });
+
+
     var allHTML = '';
     var processed = 0;
-    for(var i = 0, l = posts.length; i < l; i++) {
+
+    for(var i = 0, l = 12; i < l; i++) {
         var post = posts[i];
         createPostHTML(post, function(post) {
             processed++;
-            if(processed == posts.length) {
-                for(var k = 0, kl = posts.length; k < kl; k++) {
+            if(processed == 12) {
+                for(var k = 0, kl = 12; k < kl; k++) {
                     allHTML += posts[k].indexHTML;
                 }
+                console.log(allHTML);
                 createIndex(allHTML);
                 createAllPage(allHTML);
             }

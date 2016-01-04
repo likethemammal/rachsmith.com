@@ -55,6 +55,7 @@ gulp.task('styles', function() {
 gulp.task('watch', function() {
     gulp.watch('site/scss/*.scss', ['styles']);
     gulp.watch('site/**/*.html', ['update']);
+    gulp.watch('site/**/*.svg', ['update']);
     gulp.watch('build/*.html', notifyLivereload);
 });
 

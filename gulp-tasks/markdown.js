@@ -33,7 +33,7 @@ module.exports = function (gulp) {
                                 post.settings.content = content;
                                 //console.log(content);
                                 jsdom.env(content, function (errors, window) {
-                                    post.settings.extract = window.document.getElementsByTagName('p')[0].innerHTML;
+                                    //post.settings.extract = window.document.getElementsByTagName('p')[0].innerHTML;
                                     post.settings.url = post.path + '/' + post.html;
                                     window.close();
                                     callback(post);
@@ -49,8 +49,8 @@ module.exports = function (gulp) {
 };
 
 function formatDate(date) {
-    var dateSplit = date.split('-').join('&#8226;');
-    return dateSplit;
+    //var dateSplit = date.split('-').join('&#8226;');
+    return date;
 
 //    return getOrdinal(parseInt(dateSplit[2]))+' '+getMonthName(parseInt(dateSplit[1]))+' '+dateSplit[0];
 }

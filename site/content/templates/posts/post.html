@@ -6,22 +6,16 @@
     <meta name="description" content="{{description}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Oswald|Roboto+Slab:300' rel='stylesheet' type='text/css'>
-    <!--<link href='../css/{{style}}.css' rel='stylesheet' type='text/css'>-->
+    <link href='../css/{{style}}.css' rel='stylesheet' type='text/css'>
 
 </head>
-<body>
+<body class="{{cssClass}}">
     <header><h2>A thought from <a href="../index.html">Rachel Smith</a></h2></header>
     <main class="content">
         {{content}}
     </main>
-    <section>
-      <p>previous thought</p>
-      <p><a href="{{prev-url}}">{{prev-title}}</a></p>
-    </section>
-    <section>
-      <p>next thought</p>
-      <p><a href="{{next-url}}">{{next-title}}</a></p>
-    </section>
+    {{prev-link}}
+    {{next-link}}
     {{footer}}
 
     {{scripts}}

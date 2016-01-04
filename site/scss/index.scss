@@ -1,12 +1,15 @@
 @import 'base/normalize';
 @import 'base/global';
-@import 'bourbon/bourbon';
 
 .home-header {
     width: 100%;
     position: relative;
     overflow: hidden;
     padding-bottom: 40px;
+
+    a {
+        color: #57306f;
+    }
 
     .background {
         position: absolute;
@@ -43,7 +46,7 @@
 
 .ama {
     width: 100%;
-    padding: 15px 0px;
+    padding: 17px 0px 19px 0px;
     background: url('../img/glitter.gif') #B75CDE;
     text-align: center;
     font-size: 1.6rem;
@@ -53,6 +56,10 @@
         color: #fff;
         text-shadow: 0.17rem 0.17rem 0px #3A174C;
     }
+
+    a {
+        color: #fff;
+    }
 }
 
 .posts {
@@ -61,6 +68,99 @@
         display: inline-block;
         float: left;
         height: 300px;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        &.home-post {
+            background: #3d3b7d;
+            color: #eee;
+            h3 {
+                font-size: 1.6em;
+                line-height: 1.5;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+
+            .published {
+                font-size: 0.8em;
+                margin: 0;
+            }
+
+            a {
+                color: #eee;
+                text-decoration: none;
+            }
+
+            &.link {
+                color: #222;
+
+                &.pattern-1 {
+                    background: url('../img/patterns/1-02.svg') #fff;
+                    background-size: 160px 160px;
+                }
+
+                &.pattern-2 {
+                    background: url('../img/patterns/2-03.svg') #fff;
+                    background-size: 200px 200px;
+                }
+
+                &.pattern-3 {
+                    background: url('../img/patterns/3-04.svg') #fff;
+                    background-size: 200px 200px;
+                }
+
+                &.pattern-4 {
+                    background: url('../img/patterns/4-05.svg') #fff;
+                    background-size: 200px 200px;
+                }
+
+                a {
+                    color: #222;
+                    text-decoration: none;
+                }
+
+                .published {
+                    background: #fff;
+                    padding: 2px;
+                    display: inline-block;
+                }
+
+                .home-post-title {
+                    background: #fff;
+                    padding: 30px 12px 12px;
+                    display: inline-block;
+
+                    .icon {
+                        width: 40px;
+                        height: 40px;
+                        float: left;
+                        margin: -5px 20px 0px 17px;
+
+                        &.codepen {
+                            width: 60px;
+                            height: 60px;
+                            margin: -20px 20px -20px 0px;
+                        }
+                    }
+
+                    .icon.link {
+
+                    }
+                }
+            }
+        }
+
 
     }
+
+    .home-post-description {
+        width: 100%;
+        overflow: hidden;
+        font-size: 0.9rem;
+    }
+}
+
+footer a {
+    color: #8fd6f6;
 }
