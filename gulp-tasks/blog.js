@@ -105,28 +105,30 @@ function writePost(post, html) {
 }
 
 function createBlog(posts) {
-
-
-    var allHTML = '';
     var processed = 0;
+    var pages = Math.floor(posts.length/9);
 
-    for(var i = 0, l = 12; i < l; i++) {
+    for(var i = 0, l = posts.length; i < l; i++) {
         var post = posts[i];
         createPostHTML(post, function(post) {
             processed++;
-            if(processed == 12) {
-                for(var k = 0, kl = 12; k < kl; k++) {
-                    allHTML += posts[k].indexHTML;
+            if(processed == posts.length) {
+                for(var p = 0; p < pages; p++) {
+                    createPage(p, posts, pages);
                 }
-                console.log(allHTML);
-                createIndex(allHTML);
-                createAllPage(allHTML);
             }
         })
     }
 }
 
+function createPage(page, posts, pages) {
+    var html = '';
+    for (var i = page*9; i < (page*9)+9; i++) {
+        if (posts[i]) html += posts[i].indexHTML;
+    }
 
+    createIndexPageHTML(page, html, pages);
+}
 
 function createPostHTML(post, callback) {
     fs.readFile('site/content/templates/index/'+post.settings.type+'.html', 'utf8', function(err, template) {
@@ -140,14 +142,21 @@ function createPostHTML(post, callback) {
     });
 }
 
-function createIndex(allHTML) {
+function createIndexPageHTML(page, allHTML, pages) {
+    var pageName = 'index.html';
+    if (page) pageName = (page+1)+'.html';
     var scripts = fs.readFileSync('site/content/templates/shared/scripts.html', 'utf8');
     var footer = fs.readFileSync('site/content/templates/shared/footer.html', 'utf8');
     fs.readFile('site/content/templates/index/index.html', 'utf8', function(err, indexTemplate) {
+        var previousLink = page == pages ? '' : '<a href="'+(page+2)+'.html">< Earlier Posts</a>';
+        var nextLink = page == 0 ? '' : page == 1 ? '<a href="index.html">Later Posts ></a>'
+            : '<a href="'+(page)+'.html">Later Posts ></a>';
         indexTemplate = indexTemplate.replace('{{posts}}', allHTML);
         indexTemplate = indexTemplate.replace('{{scripts}}', scripts);
         indexTemplate = indexTemplate.replace('{{footer}}', footer);
-        fs.writeFile('build/index.html', indexTemplate, 'utf8');
+        indexTemplate = indexTemplate.replace('{{prev-page-link}}', previousLink);
+        indexTemplate = indexTemplate.replace('{{next-page-link}}', nextLink);
+        fs.writeFile('build/'+pageName, indexTemplate, 'utf8');
     });
 }
 

@@ -63,6 +63,9 @@
 }
 
 .posts {
+    width: 100%;
+    overflow: hidden;
+
     article {
         width: 33.33%;
         display: inline-block;
@@ -159,6 +162,29 @@
         overflow: hidden;
         font-size: 0.9rem;
     }
+}
+
+.pagination {
+    background: #222;
+    font-family: "ff-prater-script-web", Arial, sans-serif;
+    font-size: 1.4rem;
+    padding: 20px;
+    text-align: center;
+
+    a {
+        color: #fff;
+        padding: 0px 20px;
+    }
+}
+
+.twitter {
+    text-align: center;
+    padding: 20px;
+}
+
+.rss {
+    background: #b110ac;
+    color: #fff;
 }
 
 footer a {
