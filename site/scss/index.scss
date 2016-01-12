@@ -179,14 +179,45 @@
 
 .twitter {
     text-align: center;
-    padding: 20px;
+    padding: 20px 10px 17px 10px;
 }
 
 .rss {
     background: #b110ac;
     color: #fff;
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 6px;
+
+    a {
+        height: 30px;
+        line-height: 20px;
+        display: inline-block;
+    }
+
+    .icon.rss {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+        padding: 0px;
+    }
 }
 
 footer a {
     color: #8fd6f6;
+}
+
+@media only screen and (max-width:1024px){
+    .posts article {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    .posts article {
+        height: 300px;
+    }
 }
