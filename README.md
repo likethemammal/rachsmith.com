@@ -1,2 +1,1 @@
-# wishy-washy
-static site/blog generator
+the code & content for rachsmith.com including the static site generator http://rachsmith.com
