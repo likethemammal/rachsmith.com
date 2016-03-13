@@ -2,6 +2,9 @@
 @import 'base/global';
 
 body {
+  font-size: 1.3em;
+  line-height: 1.6;
+
   &.pattern-1 {
     background: url('../img/patterns/1-02.svg') #fff;
     background-size: 160px 160px;
@@ -25,6 +28,10 @@ body {
   h2, h3, h4 {
     font-family: "adelle-sans", Arial, sans-serif;
     font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 1.2em;
   }
 
   header {

@@ -62,10 +62,10 @@ module.exports = function (gulp, rss, md) {
                 function createHTML() {
                     for (var i = 0; i < writtenPosts.length; i++) {
                         if (writtenPosts[i-1] && writtenPosts[i-1].settings.url && writtenPosts[i-1].settings.title) {
-                            writtenPosts[i].settings['prev-link'] = '<section class="post-link prev"><p>Previous thought: <a href="'+writtenPosts[i-1].settings.url+'">'+writtenPosts[i-1].settings.title+'</a></p></section>';
+                            writtenPosts[i].settings['prev-link'] = '<section class="post-link prev"><p>Previous thought: <a href="../'+writtenPosts[i-1].settings.url+'">'+writtenPosts[i-1].settings.title+'</a></p></section>';
                         }
                         if (writtenPosts[i+1] && writtenPosts[i+1].settings.url && writtenPosts[i+1].settings.title) {
-                            writtenPosts[i].settings['next-link'] = '<section class="post-link next"><p>Next thought: <a href="'+writtenPosts[i+1].settings.url+'">'+writtenPosts[i+1].settings.title+'</a></p></section>';
+                            writtenPosts[i].settings['next-link'] = '<section class="post-link next"><p>Next thought: <a href="../'+writtenPosts[i+1].settings.url+'">'+writtenPosts[i+1].settings.title+'</a></p></section>';
                         }
                         generateHTML(writtenPosts[i], 'posts');
                     }

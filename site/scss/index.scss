@@ -79,7 +79,7 @@
             background: #3d3b7d;
             color: #eee;
             h3 {
-                font-size: 1.6em;
+                font-size: 2em;
                 line-height: 1.5;
                 margin-bottom: 5px;
                 margin-top: 5px;
@@ -95,8 +95,20 @@
                 text-decoration: none;
             }
 
+            .read-post {
+                font-family: "adelle-sans", Arial, sans-serif;
+                font-weight: 400;
+                font-size: 0.7em;
+                margin-top: 20px;
+                display: block;
+            }
+
             &.link {
                 color: #222;
+
+                h3 {
+                    font-size: 1.6em;
+                }
 
                 &.pattern-1 {
                     background: url('../img/patterns/1-02.svg') #fff;
@@ -221,3 +233,4 @@ footer a {
         height: 300px;
     }
 }
+
